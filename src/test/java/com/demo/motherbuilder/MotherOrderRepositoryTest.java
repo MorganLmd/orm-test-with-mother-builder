@@ -89,6 +89,9 @@ class MotherOrderRepositoryTest {
 
         Order savedOrder = orderRepository.save(orderToSave);
 
+        entityManager.flush();
+        entityManager.clear();
+
         Order order = orderRepository.findById(savedOrder.getId()).orElseThrow();
 
         assertThat(order.getStatus()).isEqualTo(OrderStatus.VALIDATED);
